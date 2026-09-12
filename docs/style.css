@@ -1,0 +1,275 @@
+/* Document reset: the same ground the app's own screens start from. */
+* { box-sizing: border-box; }
+html { color-scheme: light dark; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+
+/* Tokens are Baseline's own Light and Dark palettes (theme/themes.ts). */
+  :root {
+    --bg: #F7F5F2;
+    --card: #FFFFFF;
+    --ink: #15140F;
+    --body: #4E4A43;
+    --muted: #6E6A61;
+    --faint: #A09A8F;
+    --accent: #D05F43;
+    --accent-wash: #FAEEE9;
+    --hairline: rgba(21, 20, 15, 0.12);
+    --hairline-strong: rgba(21, 20, 15, 0.2);
+    --chip: rgba(21, 20, 15, 0.05);
+
+    --display: 'Barlow Semi Condensed', 'Arial Narrow', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --measure: 64ch;
+    --step-0: 1rem;
+    --step-1: 1.125rem;
+    --step-2: 1.5rem;
+    --step-3: 2rem;
+    --step-4: 2.75rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121110;
+      --card: #1D1C1A;
+      --ink: #F2EFEA;
+      --body: #D3CEC5;
+      --muted: #ADA89E;
+      --faint: #6E6A62;
+      --accent: #E57A5E;
+      --accent-wash: #3A2620;
+      --hairline: rgba(242, 239, 234, 0.14);
+      --hairline-strong: rgba(242, 239, 234, 0.24);
+      --chip: rgba(242, 239, 234, 0.07);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #121110;
+    --card: #1D1C1A;
+    --ink: #F2EFEA;
+    --body: #D3CEC5;
+    --muted: #ADA89E;
+    --faint: #6E6A62;
+    --accent: #E57A5E;
+    --accent-wash: #3A2620;
+    --hairline: rgba(242, 239, 234, 0.14);
+    --hairline-strong: rgba(242, 239, 234, 0.24);
+    --chip: rgba(242, 239, 234, 0.07);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    max-width: 47rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  /* --- masthead --- */
+  header.top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .lockup { display: flex; align-items: baseline; gap: 0.5rem; flex: 1 1 auto; min-width: 0; }
+  .lockup svg { display: block; width: 1.55rem; height: auto; flex: none; transform: translateY(0.12rem); }
+  .lockup b {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  /* Language switch, shaped like the app's segmented control. */
+  .langs { display: flex; gap: 2px; padding: 2px; border: 1px solid var(--hairline-strong); border-radius: 999px; flex: none; }
+  .langs button {
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: none;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+  }
+  .langs button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  .langs button:focus-visible, .langs button:hover { color: var(--ink); }
+  .langs button[aria-pressed="true"]:hover { color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* --- opening --- */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 3rem 0 0.75rem;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--step-4);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0 0 0.5rem;
+  }
+
+  .dateline { color: var(--muted); font-size: 0.9375rem; margin: 0 0 2.5rem; }
+  .dateline b { color: var(--ink); font-weight: 500; }
+
+  .lead {
+    font-size: var(--step-1);
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: var(--measure);
+    margin: 0 0 2rem;
+  }
+
+  /* The four facts that make the rest of the document short. */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 0 0 3rem;
+  }
+  .fact { background: var(--card); padding: 1rem 1.125rem 1.125rem; }
+  .fact dt {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+  .fact dd {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--step-2);
+    line-height: 1.2;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 2.75rem 0 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hairline);
+  }
+  h2:first-of-type { border-top: 0; padding-top: 0; }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 1.75rem 0 0.4rem;
+  }
+
+  p, ul { max-width: var(--measure); }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.1rem; }
+  li { margin-bottom: 0.4rem; }
+  li::marker { color: var(--faint); }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  /* What the app reads from the health store, and what for. */
+  .reads { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1.5rem; font-size: 0.9375rem; }
+  .reads caption {
+    text-align: left;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 0.6rem;
+  }
+  .reads th, .reads td { text-align: left; padding: 0.6rem 0.75rem 0.6rem 0; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  .reads th { font-weight: 500; color: var(--ink); white-space: nowrap; }
+  .reads td { color: var(--body); }
+  .scroller { overflow-x: auto; }
+
+  .never {
+    background: var(--accent-wash);
+    border-radius: 14px;
+    padding: 1.25rem 1.375rem;
+    margin: 1.5rem 0 1rem;
+  }
+  .never p:last-child { margin-bottom: 0; }
+  .never strong { color: var(--ink); }
+
+  .note {
+    border: 1px dashed var(--hairline-strong);
+    border-radius: 12px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin: 2rem 0 0;
+  }
+  .todo {
+    font-family: var(--display);
+    font-size: 1em;
+    background: var(--chip);
+    border-bottom: 2px solid var(--accent);
+    padding: 0 0.25rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hairline);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  footer p { margin-bottom: 0.35rem; }
+
+  [data-lang] { display: none; }
+  [data-lang].on { display: block; }
+
+  @media (max-width: 34rem) {
+    :root { --step-4: 2.125rem; --step-2: 1.3125rem; }
+    .shell { padding: 0 1.125rem 4rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
